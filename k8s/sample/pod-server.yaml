@@ -1,0 +1,40 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: server
+  namespace: default
+  labels:
+    app: webserver
+spec:
+  containers:
+  - name: webserver
+    image: lbsim25/webserver:v1
+    imagePullPolicy: Always
+    ports:
+    - containerPort: 8080
+      name: http
+    env:
+    - name: ODJ_EE_HTTP_PORT
+      value: "8080"
+    - name: ODJ_DEP_RESPONSE_DELAY #TODO: server config
+      value: "10" # response delay in millisecs
+    livenessProbe:
+      httpGet:
+        path: /live
+        port: http
+      initialDelaySeconds: 5
+      periodSeconds: 10
+    readinessProbe:
+      httpGet:
+        path: /ready
+        port: http
+      initialDelaySeconds: 5
+      periodSeconds: 10
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "100M"
+      limits:
+        cpu: "200m"
+        memory: "200M"

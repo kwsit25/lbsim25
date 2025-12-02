@@ -4,6 +4,7 @@ loadbalancing simulation in k8s
 ## Install
 
 1. Install k8s (enable via Docker Desktop)
+1. Install go [Download and install](https://go.dev/doc/install)
 1. Build docker container of services
 	1. Install go dependencies with `go mod download`
 	1. Build go webclient & go webserver
