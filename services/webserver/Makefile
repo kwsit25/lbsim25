@@ -1,0 +1,6 @@
+include ../../tools/make/include.mk
+
+DOCKER_REPO = lbsim25/webserver
+
+run-air: ## Runs service locally in reload mode
+	@air -c .air.toml
